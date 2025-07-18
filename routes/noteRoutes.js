@@ -3,16 +3,16 @@ import Note from "../models/note.js";
 
 const router = express.Router();
 
-// GET Notes
+// GET Notes (get notes)
 
 
 
 
-// POST Notes
+// POST Notes (create a note) 
 
 
 
-// UPDATE Notes
+// UPDATE Notes 
 
 
 
