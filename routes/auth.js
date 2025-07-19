@@ -15,7 +15,7 @@ const router = express.Router();
 router.post("/register", async (req, res) => {
   // Extract the username and password from the request body.
   // This assumes the client is sending a JSON object with 'username' and 'password' fields.
-  const { username, password } = req.body;
+  const { firstName, lastName, username, password, email, role } = req.body;
   try {
     // Hash the user's password before storing it. This is a crucial security practice.
     // The 'hashPassword' method is assumed to be a static method on the User model.

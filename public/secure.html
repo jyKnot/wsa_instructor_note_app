@@ -1,11 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>This is the secure page</h1>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Secure Page</title>
+  </head>
+  <body>
+    <h1>Secure Page</h1>
+    <p>Only authenticated users can see this.</p>
+    <a href="/auth/logout">Logout</a>
+
+    <script>
+      fetch("/protected/secure")
+        .then((res) => {
+          if (res.ok) return res.text();
+          else throw new Error("Not authenticated");
+        })
+        .then((data) => {
+          // Optionally handle data
+        })
+        .catch(() => {
+          window.location.href = "/index.html";
+        });
+    </script>
+  </body>
 </html>

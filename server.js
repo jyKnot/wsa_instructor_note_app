@@ -74,7 +74,7 @@ app.get('/logout', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'logout.html'));
 });
 
-// Route to serve register.html at /logout
+// Route to serve register.html at /register
 app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html'));
 });
