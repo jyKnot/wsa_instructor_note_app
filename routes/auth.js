@@ -5,7 +5,7 @@ import express from "express";
 // Import Passport, which we use for authenticating login requests.
 import passport from "passport";
 // Import the User model to interact with the user data in the database, e.g., for registration.
-import User from "../models/note.js";
+import User from "../models/user.js";
 
 // Create a new router object. This allows us to define a set of routes in a separate file.
 const router = express.Router();

@@ -3,7 +3,7 @@ import passport from "passport";
 // Import the LocalStrategy from passport-local. This strategy is used for username/password authentication.
 import { Strategy as LocalStrategy } from "passport-local";
 // Import the User model. This model represents our users in the database and has methods for finding users and validating passwords.
-import User from "./models/note.js";
+import User from "./models/user.js";
 
 // Configure Passport to use the LocalStrategy.
 // This function will be called when a user tries to log in.
