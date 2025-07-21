@@ -7,6 +7,12 @@ import passport from "passport";
 // Import the User model to interact with the user data in the database, e.g., for registration.
 import User from "../models/user.js";
 
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 // Create a new router object. This allows us to define a set of routes in a separate file.
 const router = express.Router();
 
@@ -21,7 +27,13 @@ router.post("/register", async (req, res) => {
     // The 'hashPassword' method is assumed to be a static method on the User model.
     const hashedPassword = await User.hashPassword(password);
     // Create a new user instance with the username and the hashed password.
-    const newUser = new User({ username, password: hashedPassword });
+    const newUser = new User({ 
+        firstName,
+        lastName,
+        username, 
+        password: hashedPassword,
+    role,
+ });
     // Save the new user to the database.
     await newUser.save();
     // If user creation is successful, send a 201 (Created) status and a success message.
@@ -32,21 +44,44 @@ router.post("/register", async (req, res) => {
   }
 });
 
-// Define a POST route for user login at '/login'.
-// It uses Passport's 'authenticate' middleware with the 'local' strategy.
-// The 'local' strategy is what we configured in 'passport-config.js' for username/password authentication.
-router.post("/login", passport.authenticate("local"), (req, res) => {
-  // If `passport.authenticate('local')` is successful, it calls the `done(null, user)` callback from our strategy.
-  // Passport then attaches the user object to `req.user` and calls this route handler.
-  // We send a JSON response indicating successful login.
-  // The client can then use this to know the login was successful, and a session cookie is usually set automatically by `express-session` and Passport.
-  res.json({
-    message: "Login successful",
-    user: { username: req.user.username },
-  });
+
+
+router.post("/login", (req, res, next) => {
+  passport.authenticate("local", (err, user, info) => {
+
+    // Step 1: Handle unexpected server errors
+    if (err) return next(err);
+
+    // Step 2: Handle failed login (wrong username or password)
+
+    if (!user) {
+      return res.status(401).json({ message: info?.message || "Login failed" });
+    }
+
+    // Step 3: Log the user in (establish session)
+
+    req.login(user, (err) => {
+      if (err) return next(err);
+
+      // Step 4: Send success response
+
+      res.json({
+        message: "Login successful",
+        user: { username: user.username },
+      });
+    });
+  })(req, res, next); // Important: immediately call the middleware with req, res, next
 });
 
+
+// Define a GET route for user register at '/register'.
+router.get("/register", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/register.html"));
+});
+
+
 // Define a GET route for user logout at '/logout'.
+
 router.get("/logout", (req, res) => {
   // `req.logout()` is a function provided by Passport to terminate a login session.
   // It removes the `req.user` property and clears the login session (if any).

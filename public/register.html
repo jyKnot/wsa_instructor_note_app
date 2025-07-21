@@ -22,6 +22,7 @@
       rel="stylesheet"
     />
   </head>
+  <form action="/auth/register" method="POST">
   <body style="background-color: #495579; font-family: 'Questrial', sans-serif">
     <!-- Centered login container -->
     <div
@@ -50,25 +51,30 @@
           </div>
 
           <!-- Name (First and Last) -->
-          <div class="mb-3">
-            <label for="first-last-name" class="form-label">Name</label>
+ <!-- Name (First and Last) -->
+            <div class="mb-3">
+            <label class="form-label">Name</label>
             <div class="row">
-              <div class="col">
+                <div class="col">
                 <input
-                  type="text"
-                  class="form-control"
-                  placeholder="First name"
+                    type="text"
+                    class="form-control"
+                    name="firstName"
+                    placeholder="First name"
+                    required
                 />
-              </div>
-              <div class="col">
+                </div>
+                <div class="col">
                 <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Last name"
+                    type="text"
+                    class="form-control"
+                    name="lastName"
+                    placeholder="Last name"
+                    required
                 />
-              </div>
+                </div>
             </div>
-          </div>
+            </div>
 
           <!-- Username -->
           <div class="mb-3">
@@ -79,6 +85,7 @@
                 type="text"
                 class="form-control"
                 id="username"
+                name="username"
                 placeholder="Username"
                 aria-label="Username"
                 aria-describedby="visible-addon"
@@ -99,6 +106,7 @@
               type="email"
               class="form-control"
               id="email"
+              name="email"
               placeholder="name@example.com"
             />
           </div>
@@ -110,6 +118,7 @@
               type="password"
               class="form-control"
               id="password"
+              name="password"
               aria-describedby="passwordHelp"
             />
             <div id="passwordHelp" class="form-text text-light mt-0">
@@ -120,7 +129,7 @@
           <!-- Role Selection -->
           <div class="mb-3">
             <label for="role" class="form-label">Role</label>
-            <select class="form-select" id="role">
+            <select class="form-select" id="role" name="role">
               <option selected disabled>Select your role</option>
               <option value="instructor">Instructor</option>
               <option value="student">Student</option>
@@ -153,4 +162,5 @@
       </div>
     </div>
   </body>
+</form>
 </html>
