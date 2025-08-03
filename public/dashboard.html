@@ -1,19 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<!-- name identifiying account -->
-<!-- notes appearing as tiles? -->
-<!-- WSA Branding -->
-
-
-
-
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Dashboard | Note Taking App</title>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Questrial&family=Source+Sans+3:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
   </head>
-  <body>
-    <h1>This is a dashboard</h1>
+  <body
+    style="background-color: #495579; font-family: 'Questrial', sans-serif"
+    class="text-light"
+  >
+    <div class="container py-4">
+      <!-- Greeting Section -->
+      <div class="d-flex align-items-center mb-4">
+        <div>
+          <h4 class="mb-0">Hello, <span id="username">User</span>!</h4>
+          <small class="text-light opacity-75">Here's your dashboard</small>
+        </div>
+      </div>
+
+      <!-- Notes Section Header -->
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="mb-0">Your Notes</h5>
+        <button class="btn btn-light btn-sm text-dark fw-bold" id="addNoteBtn">
+          + Add Note
+        </button>
+      </div>
+
+      <!-- Notes Grid -->
+      <div class="row" id="notesContainer">
+        <!-- Sample Note -->
+        <div class="col-md-4 mb-3">
+          <div class="card bg-light text-dark shadow-sm">
+            <div class="card-body">
+              <h6 class="card-title">Sample Note Title</h6>
+              <p class="card-text text-dark opacity-75">
+                This is an example note. You can edit or delete it.
+              </p>
+              <div class="d-flex justify-content-end gap-2">
+                <button class="btn btn-sm btn-outline-dark">Edit</button>
+                <button class="btn btn-sm btn-danger">Delete</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Sample Note -->
+      </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Add Note Modal -->
+    <div
+      class="modal fade"
+      id="addNoteModal"
+      tabindex="-1"
+      aria-labelledby="addNoteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-header">
+            <h5 class="modal-title" id="addNoteModalLabel">Add Note</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="addNoteForm">
+              <div class="mb-3">
+                <label for="noteTitle" class="form-label">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="noteTitle"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="noteContent" class="form-label">Content</label>
+                <textarea
+                  class="form-control"
+                  id="noteContent"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">Add Note</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="dashboard.js"></script>
   </body>
 </html>

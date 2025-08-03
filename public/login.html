@@ -27,22 +27,21 @@
     class="text-light"
   >
     <!-- Centered login container -->
-    <div class="d-flex justify-content-center align-items-center min-vh-100 p-4">
-
+    <div
+      class="d-flex justify-content-center align-items-center min-vh-100 p-4"
+    >
       <!-- Login Card -->
       <div class="card shadow-lg p-4 border-0 mt-5" style="width: 22rem">
         <div class="card-body">
-
           <!-- Logo -->
           <div class="text-center mb-3">
             <img
-              src="/assets/wsa_logo.png"
+              src="/public/assets/wsa_logo.png"
               alt="Whistler Sailing Logo"
               class="img-fluid"
               style="max-height: 60px"
             />
           </div>
-
           <!-- Title -->
           <h5 class="card-title text-center fw-semibold">
             Instructor Tracking App
@@ -50,37 +49,38 @@
           <h6 class="card-subtitle text-muted text-center mb-4">
             Whistler Sailing
           </h6>
-
-          <!-- Email Input -->
-          <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              placeholder="name@example.com"
-            />
-          </div>
-
-          <!-- Password Input -->
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              aria-describedby="passwordHelp"
-            />
-            <div id="passwordHelp" class="form-text text-muted">
-              Must be 8–20 characters.
+          <form action="/auth/login" method="POST">
+            <!-- Username Input -->
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <input
+                type="text"
+                class="form-control"
+                id="username"
+                name="username"
+                placeholder="Username"
+                required
+              />
             </div>
-          </div>
-
-          <!-- Login Button -->
-          <div class="d-grid mb-4">
-            <button type="submit" class="btn btn-primary">Login</button>
-          </div>
-
+            <!-- Password Input -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                required
+              />
+              <div id="passwordHelp" class="form-text text-muted">
+                Must be 8–20 characters.
+              </div>
+            </div>
+            <!-- Login Button -->
+            <div class="d-grid mb-4">
+              <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+          </form>
           <!-- No Account - Register -->
           <div class="mb-4">
             <p>

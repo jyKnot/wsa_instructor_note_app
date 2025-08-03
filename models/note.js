@@ -1,20 +1,25 @@
 import mongoose from "mongoose";
 
+const entrySchema = new mongoose.Schema({
+    text: { type: String, required: true },
+  createdAt: { type: Date, default: Date.now }
+});
+
 const noteSchema = new mongoose.Schema(
     {
-        title: {
+        studentName: {
             type: String, 
             required: true, 
         },
-        content: {
-            type: String, 
+        instructor: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
             required: true, 
         },
-        date: {
-            type: Date, 
-            default: Date.now,
-        }
-    }
+        entries: [entrySchema],
+        media: [{ type: String }] // we'll store image/video URLs or file paths here
+    },
+  { timestamps: true }
 );
 
 const Note = mongoose.model("Note", noteSchema);

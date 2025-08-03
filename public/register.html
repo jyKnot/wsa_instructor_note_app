@@ -23,144 +23,146 @@
     />
   </head>
   <form action="/auth/register" method="POST">
-  <body style="background-color: #495579; font-family: 'Questrial', sans-serif">
-    <!-- Centered login container -->
-    <div
-      class="d-flex justify-content-center align-items-center min-vh-100 py-5"
+    <body
+      style="background-color: #495579; font-family: 'Questrial', sans-serif"
     >
-      <!-- Login Card -->
+      <!-- Centered login container -->
       <div
-        class="card shadow-lg p-4 border-0 overflow-auto"
-        style="width: 22rem"
+        class="d-flex justify-content-center align-items-center min-vh-100 py-5"
       >
-        <div class="card-body">
-          <!-- Logo -->
-          <div class="text-center mb-3">
-            <img
-              src="/assets/wsa_logo.png"
-              alt="Whistler Sailing Logo"
-              class="img-fluid"
-              style="max-height: 60px"
-            />
-          </div>
+        <!-- Login Card -->
+        <div
+          class="card shadow-lg p-4 border-0 overflow-auto"
+          style="width: 22rem"
+        >
+          <div class="card-body">
+            <!-- Logo -->
+            <div class="text-center mb-3">
+              <img
+                src="/public/assets/wsa_logo.png"
+                alt="Whistler Sailing Logo"
+                class="img-fluid"
+                style="max-height: 60px"
+              />
+            </div>
 
-          <!-- Title block -->
-          <div class="text-center mb-4">
-            <h5 class="card-title fw-semibold">Register your Account</h5>
-            <h6 class="card-subtitle text-muted">Instructor Tracking App</h6>
-          </div>
+            <!-- Title block -->
+            <div class="text-center mb-4">
+              <h5 class="card-title fw-semibold">Register your Account</h5>
+              <h6 class="card-subtitle text-muted">Instructor Tracking App</h6>
+            </div>
 
-          <!-- Name (First and Last) -->
- <!-- Name (First and Last) -->
+            <!-- Name (First and Last) -->
+            <!-- Name (First and Last) -->
             <div class="mb-3">
-            <label class="form-label">Name</label>
-            <div class="row">
+              <label class="form-label">Name</label>
+              <div class="row">
                 <div class="col">
-                <input
+                  <input
                     type="text"
                     class="form-control"
                     name="firstName"
                     placeholder="First name"
                     required
-                />
+                  />
                 </div>
                 <div class="col">
-                <input
+                  <input
                     type="text"
                     class="form-control"
                     name="lastName"
                     placeholder="Last name"
                     required
-                />
+                  />
                 </div>
-            </div>
+              </div>
             </div>
 
-          <!-- Username -->
-          <div class="mb-3">
-            <label for="username" class="form-label">Username</label>
-            <div class="input-group">
-              <span class="input-group-text" id="visible-addon">@</span>
+            <!-- Username -->
+            <div class="mb-3">
+              <label for="username" class="form-label">Username</label>
+              <div class="input-group">
+                <span class="input-group-text" id="visible-addon">@</span>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="username"
+                  name="username"
+                  placeholder="Username"
+                  aria-label="Username"
+                  aria-describedby="visible-addon"
+                />
+              </div>
+            </div>
+
+            <!-- Profile Picture Upload -->
+            <!-- <div class="mb-3">
+              <label for="formFile" class="form-label">Profile Picture</label>
+              <input class="form-control" type="file" id="formFile" />
+            </div> -->
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email address</label>
               <input
-                type="text"
+                type="email"
                 class="form-control"
-                id="username"
-                name="username"
-                placeholder="Username"
-                aria-label="Username"
-                aria-describedby="visible-addon"
+                id="email"
+                name="email"
+                placeholder="name@example.com"
               />
             </div>
-          </div>
 
-          <!-- Profile Picture Upload -->
-          <div class="mb-3">
-            <label for="formFile" class="form-label">Profile Picture</label>
-            <input class="form-control" type="file" id="formFile" />
-          </div>
-
-          <!-- Email -->
-          <div class="mb-3">
-            <label for="email" class="form-label">Email address</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              name="email"
-              placeholder="name@example.com"
-            />
-          </div>
-
-          <!-- Password -->
-          <div class="mb-3">
-            <label for="password" class="form-label">Password</label>
-            <input
-              type="password"
-              class="form-control"
-              id="password"
-              name="password"
-              aria-describedby="passwordHelp"
-            />
-            <div id="passwordHelp" class="form-text text-light mt-0">
-              Must be 8–20 characters.
+            <!-- Password -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="password"
+                name="password"
+                aria-describedby="passwordHelp"
+              />
+              <div id="passwordHelp" class="form-text text-light mt-0">
+                Must be 8–20 characters.
+              </div>
             </div>
-          </div>
 
-          <!-- Role Selection -->
-          <div class="mb-3">
-            <label for="role" class="form-label">Role</label>
-            <select class="form-select" id="role" name="role">
-              <option selected disabled>Select your role</option>
-              <option value="instructor">Instructor</option>
-              <option value="student">Student</option>
-            </select>
-          </div>
+            <!-- Role Selection -->
+            <div class="mb-3">
+              <label for="role" class="form-label">Role</label>
+              <select class="form-select" id="role" name="role">
+                <option selected disabled>Select your role</option>
+                <option value="instructor">Instructor</option>
+                <option value="student">Student</option>
+              </select>
+            </div>
 
-          <!-- Terms and Conditions -->
-          <div class="form-check mb-4">
-            <input
-              class="form-check-input"
-              type="checkbox"
-              value=""
-              id="checkDefault"
-            />
-            <label class="form-check-label" for="checkDefault">
-              I agree to the terms and conditions.
-            </label>
-          </div>
+            <!-- Terms and Conditions -->
+            <div class="form-check mb-4">
+              <input
+                class="form-check-input"
+                type="checkbox"
+                value=""
+                id="checkDefault"
+              />
+              <label class="form-check-label" for="checkDefault">
+                I agree to the terms and conditions.
+              </label>
+            </div>
 
-          <!-- Submit Button -->
-          <div class="d-grid mb-4">
-            <button type="submit" class="btn btn-primary">Register</button>
-          </div>
+            <!-- Submit Button -->
+            <div class="d-grid mb-4">
+              <button type="submit" class="btn btn-primary">Register</button>
+            </div>
 
-          <!-- Already registered -->
-          <div class="mb-4">
-            <p>Already have an account? <a href="/login.html">Login</a></p>
+            <!-- Already registered -->
+            <div class="mb-4">
+              <p>Already have an account? <a href="/login.html">Login</a></p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </body>
-</form>
+    </body>
+  </form>
 </html>

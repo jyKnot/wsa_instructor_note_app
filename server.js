@@ -33,8 +33,16 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static("public"));
-app.use("/api", noteRoutes); 
+app.use("/api/notes", noteRoutes); 
 
+
+
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) {
+    return next(); //  They're logged in — allow access
+  }
+  res.redirect("/login"); //  Not logged in — send them to login
+}
 
 
 
@@ -94,7 +102,7 @@ app.get('/login', (req, res) => {
 });
 
 // Route to serve dashboard.html at /dashboard
-app.get('/dashboard', (req, res) => {
+app.get('/dashboard', ensureAuthenticated,(req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'dashboard.html'));
 });
 
@@ -104,7 +112,7 @@ app.get('/secure', (req, res) => {
 });
 
 // Route to serve profile.html at /profile
-app.get('/profile', (req, res) => {
+app.get('/profile', ensureAuthenticated, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'profile.html'));
 });
 

@@ -1,12 +1,9 @@
 // passport
 
-// Import the Express.js framework, which we use to create router modules.
-import express from "express";
-// Import Passport, which we use for authenticating login requests.
-import passport from "passport";
-// Import the User model to interact with the user data in the database, e.g., for registration.
-import User from "../models/user.js";
 
+import express from "express";
+import passport from "passport";
+import User from "../models/user.js";
 import path from "path";
 import { fileURLToPath } from "url";
 
@@ -32,51 +29,82 @@ router.post("/register", async (req, res) => {
         lastName,
         username, 
         password: hashedPassword,
-    role,
+        email,
+        role,
  });
     // Save the new user to the database.
     await newUser.save();
-    // If user creation is successful, send a 201 (Created) status and a success message.
-    res.status(201).json({ message: "User created successfully" });
+    req.logIn(newUser, (err) => {
+      if (err) {
+        return res.status(500).json({ message: "Login after registration failed", error: err.message });
+      }
+      res.redirect("/dashboard");
+    });
   } catch (error) {
-    // If there's an error (e.g., username already exists, database error), send a 400 (Bad Request) status and an error message.
-    res.status(400).json({ message: "User not created", error: error.message });
+    res.status(400).json({ message: "Registration failed", error: error.message });
   }
 });
 
 
-
+// Login user
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {
-
-    // Step 1: Handle unexpected server errors
     if (err) return next(err);
+    if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
-    // Step 2: Handle failed login (wrong username or password)
-
-    if (!user) {
-      return res.status(401).json({ message: info?.message || "Login failed" });
-    }
-
-    // Step 3: Log the user in (establish session)
-
-    req.login(user, (err) => {
+    req.logIn(user, (err) => {
       if (err) return next(err);
-
-      // Step 4: Send success response
-
-      res.json({
-        message: "Login successful",
-        user: { username: user.username },
-      });
+      res.redirect("/dashboard");
     });
-  })(req, res, next); // Important: immediately call the middleware with req, res, next
+  })(req, res, next);
 });
 
+// LOGOUT User
+router.post("/logout", (req, res) => {
+  req.logout((err) => {
+    if (err) return res.status(500).json({ message: "Logout failed", error: err.message });
+    res.json({ message: "Logout successful" });
+  });
+});
+
+
+router.post("/register", async (req, res) => {
+  const { firstName, lastName, username, password, email, role } = req.body;
+
+  try {
+    // Check if username already exists
+    const existingUser = await User.findOne({ username });
+    if (existingUser) {
+      return res.status(400).json({ message: "Username already taken" });
+    }
+
+    // Hash password and create user
+    const hashedPassword = await User.hashPassword(password);
+    const newUser = new User({
+      firstName,
+      lastName,
+      username,
+      password: hashedPassword,
+      email,
+      role,
+    });
+
+    await newUser.save();
+    res.status(201).json({ message: "User registered successfully", user: newUser });
+  } catch (error) {
+    res.status(400).json({ message: "Registration failed", error: error.message });
+  }
+});
 
 // Define a GET route for user register at '/register'.
 router.get("/register", (req, res) => {
   res.sendFile(path.join(__dirname, "../public/register.html"));
+});
+
+
+// /dashboard
+router.get("/dashboard", (req, res) => {
+  res.sendFile(path.join(__dirname, "../public/dashboard.html"));
 });
 
 
@@ -100,3 +128,5 @@ router.get("/logout", (req, res) => {
 
 // Export the router so it can be imported and used in 'server.js'.
 export default router;
+
+
