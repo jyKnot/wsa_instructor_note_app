@@ -33,7 +33,6 @@ const app = express();
 
 app.use(express.json());
 app.use(express.static("public"));
-app.use("/api/notes", noteRoutes); 
 
 
 
@@ -59,14 +58,8 @@ app.use(
     // This is useful for reducing server storage usage and complying with cookie laws.
     saveUninitialized: false,
     cookie: {
-      // `secure: true` ensures the cookie is only sent over HTTPS. This should be true in production.
-      // It's set based on the NODE_ENV environment variable.
-      secure: process.env.NODE_ENV === "production",
-      // `maxAge` sets the maximum age of the cookie in milliseconds (here, 7 days).
-      // After this time, the cookie (and session) will expire.
+      secure: false, // Always false for localhost development
       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-      // `sameSite: 'strict'` helps protect against CSRF (Cross-Site Request Forgery) attacks
-      // by restricting when the browser sends the cookie.
       sameSite: "strict",
     },
   })
@@ -81,7 +74,10 @@ app.use(passport.initialize());
 // This middleware must be used after `express-session`.
 app.use(passport.session());
 
+
+app.use("/api/notes", noteRoutes);
 app.use("/auth", authRoutes);
+app.use("/protected", protectedRoutes);
 
 const PORT = 3000;
 
@@ -124,4 +120,14 @@ app.get('/logout', (req, res) => {
 // Route to serve register.html at /register
 app.get('/register', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'register.html'));
+});
+
+passport.deserializeUser((id, done) => {
+  console.log('deserializeUser called with id:', id);
+  User.findById(id)
+    .then(user => {
+      console.log('deserializeUser found user:', user);
+      done(null, user);
+    })
+    .catch(err => done(err));
 });

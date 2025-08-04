@@ -27,12 +27,13 @@
     class="text-light"
   >
     <div class="container py-4">
-      <!-- Greeting Section -->
-      <div class="d-flex align-items-center mb-4">
+      <!-- Greeting Section + Logout Button -->
+      <div class="d-flex align-items-center mb-4 justify-content-between">
         <div>
           <h4 class="mb-0">Hello, <span id="username">User</span>!</h4>
           <small class="text-light opacity-75">Here's your dashboard</small>
         </div>
+        <button id="logoutBtn" class="btn btn-outline-light">Logout</button>
       </div>
 
       <!-- Notes Section Header -->
@@ -67,6 +68,53 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Add Note Modal -->
+    <!-- Edit Note Modal -->
+    <div
+      class="modal fade"
+      id="editNoteModal"
+      tabindex="-1"
+      aria-labelledby="editNoteModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content bg-dark text-light">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editNoteModalLabel">Edit Note</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="editNoteForm">
+              <div class="mb-3">
+                <label for="editNoteTitle" class="form-label">Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editNoteTitle"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="editNoteContent" class="form-label">Content</label>
+                <textarea
+                  class="form-control"
+                  id="editNoteContent"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary">
+                Save Changes
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <div
       class="modal fade"
       id="addNoteModal"
@@ -87,6 +135,15 @@
           </div>
           <div class="modal-body">
             <form id="addNoteForm">
+              <div class="mb-3">
+                <label for="studentName" class="form-label">Student Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="studentName"
+                  required
+                />
+              </div>
               <div class="mb-3">
                 <label for="noteTitle" class="form-label">Title</label>
                 <input
@@ -112,5 +169,6 @@
       </div>
     </div>
     <script src="dashboard.js"></script>
+    <script src="user.js"></script>
   </body>
 </html>

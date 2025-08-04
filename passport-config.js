@@ -51,16 +51,13 @@ passport.serializeUser((user, done) => {
 // Deserialization is the process of retrieving the user object from the session using the ID stored during serialization.
 // On subsequent requests from a logged-in user, Passport will call this function with the ID from the session.
 passport.deserializeUser(async (id, done) => {
+  console.log('deserializeUser called with id:', id);
   try {
-    // Find the user in the database using the ID.
     const user = await User.findById(id);
-    // Once the user is found, call 'done' with 'null' (no error) and an object containing the user's username.
-    // This makes `req.user` available in our route handlers with the username.
-    // You might choose to return the full user object or just specific parts of it.
-    done(null, { username: user.username });
+    console.log('deserializeUser found user:', user);
+    done(null, user ? { _id: user._id, username: user.username } : null);
   } catch (error) {
-    // If any error occurs (e.g., user not found or database error)...
-    // ...call 'done' with the error object.
+    console.log('deserializeUser error:', error);
     done(error);
   }
 });

@@ -31,7 +31,7 @@ router.get("/profile", ensureAuthenticated, (req, res) => {
   // Note: In passport-config.js, we set `done(null, { username: user.username })` in deserializeUser,
   // so `req.user` here will be an object like `{ username: 'the_actual_username' }`.
   console.log("Logged-in user", req.user);
-  res.json({ username: req.user.username });
+  res.json({ username: req.user.username, _id: req.user._id });
 });
 
 // Define another GET route, '/secure', also protected by the `ensureAuthenticated` middleware.

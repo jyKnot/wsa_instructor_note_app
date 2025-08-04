@@ -11,6 +11,14 @@ const noteSchema = new mongoose.Schema(
             type: String, 
             required: true, 
         },
+        title: {
+            type: String,
+            required: true,
+        },
+        content: {
+            type: String,
+            required: true,
+        },
         instructor: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
