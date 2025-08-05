@@ -25,4 +25,18 @@ View Notes – Retrieve and display all saved notes.
 Edit Notes – Update existing notes. 
 Delete Notes – Remove unwanted notes from the database.
 
+## Tech Stack
 
+* Front-End: HTML, CSS, JavaScript 
+* Back-End: Node.js, Express.js
+* Database: MongoDB
+* Authentication: Passport.js
+* Version Control: Git
+* Package Manager: npm
+
+
+## Installation
+
+* Clone the repo
+* install dependencies
+* start the server

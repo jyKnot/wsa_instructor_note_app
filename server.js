@@ -1,4 +1,5 @@
 // imports
+
 import express from "express";
 import path from "path";
 import passport from "passport";
@@ -13,9 +14,11 @@ import { fileURLToPath } from "url";
 
 
 // configure .env file
+
 dotenv.config();
 
 // db connection
+
 mongoose.connect(process.env.LOCAL_MONGOOSE_CONNECTION_URL);
 const db = mongoose.connection;
 
@@ -29,6 +32,7 @@ mongoose.connect(process.env.LOCAL_MONGOOSE_CONNECTION_URL)
   });
 
 // server
+
 const app = express();
 
 app.use(express.json());
@@ -46,6 +50,7 @@ function ensureAuthenticated(req, res, next) {
 
 
 // Configure the express-session middleware.
+
 app.use(
   session({
     // `secret` is used to sign the session ID cookie. It should be a long, random string kept secret.

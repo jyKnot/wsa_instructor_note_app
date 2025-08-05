@@ -1,12 +1,14 @@
 // controllers/userController.js
+
 import User from "../models/User.js";
 
 // Register a new user
+
 export const registerUser = async (req, res) => {
   try {
     const { firstName, lastName, username, password, role } = req.body;
 
-    // Check if username already exists
+// Check if username already exists
 
     const existingUser = await User.findOne({ username });
     if (existingUser) {
@@ -16,12 +18,12 @@ export const registerUser = async (req, res) => {
       });
     }
 
-    // Hash password using schema method
+// Hash password using schema method
 
     const hashedPassword = await User.hashPassword(password);
 
-    // Create and save new user
-    
+// Create and save new user
+
     const newUser = new User({
       firstName,
       lastName,
